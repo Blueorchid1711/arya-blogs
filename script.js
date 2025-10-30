@@ -1,3 +1,4 @@
+// Define all posts
 const posts = [
   {
     id: 1,
@@ -6,10 +7,11 @@ const posts = [
     image: "ai1.png",
     description: "An introduction to what this blog is about and what to expect.",
     content: `
-      <p>Welcome to my blog! This space is where I share my experiences, learnings, and insights on topics that matter to me.</p>
-      <p>Here’s a sneak peek of what’s coming: personal growth stories, tech tutorials, reflections, and a bit of creativity.</p>
-      <img src="image1.png" alt="blog intro image">
-      <p>Stick around—each post aims to offer something meaningful you can take away.</p>
+      <p>Welcome to my blog! This is where I share my thoughts, learnings, and reflections. 
+      You’ll find posts on technology, creativity, and everything that inspires me to keep learning.</p>
+      <p>Every article is written to offer something meaningful — whether it’s a lesson, perspective, or story.</p>
+      <img src="ai1.png" alt="blog intro image">
+      <p>Thanks for visiting — I hope you find something valuable here.</p>
     `
   },
   {
@@ -19,10 +21,10 @@ const posts = [
     image: "ai2.png",
     description: "A simple guide to understanding Git and GitHub for beginners.",
     content: `
-      <p>Version control might sound complicated, but Git makes it simple once you get the basics.</p>
-      <img src="image2.png" alt="git and github image">
-      <p>Git helps you track changes in your code. GitHub lets you store and collaborate on those changes online.</p>
-      <p>Learning this skill improves your teamwork, coding discipline, and professional credibility.</p>
+      <p>When I first learned Git, it felt intimidating. But once I realized it’s just like “Save Game” for code — everything clicked!</p>
+      <p>Git lets you track your code changes locally, while GitHub helps you share and collaborate with others online.</p>
+      <img src="ai2.png" alt="Git and GitHub Image">
+      <p>Whether you're building solo projects or contributing to open source, Git is an essential skill that makes your workflow cleaner and safer.</p>
     `
   },
   {
@@ -32,56 +34,52 @@ const posts = [
     image: "ai3.png",
     description: "Projects teach more than theory ever can — here’s why I believe in learning by doing.",
     content: `
-      <p>Building projects gives you the confidence that tutorials can’t. It’s the difference between knowing and doing.</p>
-      <img src="image3.png" alt="project building image">
-      <p>Every project I’ve worked on — from data dashboards to AI models — taught me something new, practical, and impactful.</p>
-      <p>Don’t wait to feel ready; start small, fail fast, and learn faster.</p>
+      <p>Projects give life to knowledge. Every time you build something new, you understand concepts in a deeper, practical way.</p>
+      <p>From small Python scripts to AI models, each project I’ve built taught me problem-solving, patience, and creativity.</p>
+      <img src="ai3.png" alt="Building projects image">
+      <p>So stop waiting for the perfect idea — start with curiosity, and let the journey teach you more than the destination.</p>
     `
   }
 ];
 
-// Load current year in footer
-document.getElementById("year").textContent = new Date().getFullYear();
-
-const postsContainer = document.getElementById("posts");
-const postDetail = document.getElementById("post-detail");
-
-// Render all posts
+// Fill posts on homepage
 function renderPosts() {
+  const postsContainer = document.getElementById("posts");
   postsContainer.innerHTML = posts.map(post => `
     <div class="card">
       <img src="${post.image}" alt="${post.title}">
       <h2>${post.title}</h2>
       <small>${post.date}</small>
       <p>${post.description}</p>
-      <a href="#" class="read-more" onclick="openPost(${post.id});return false;">Read More →</a>
+      <a href="post.html" class="read-more" onclick="savePost(${post.id})">Read More →</a>
     </div>
-  `).join("");
+  `).join('');
 }
 
-// Open single post
-function openPost(id) {
-  const post = posts.find(p => p.id === id);
-  if (!post) return;
-
-  postsContainer.classList.add("hidden");
-  postDetail.classList.remove("hidden");
-
-  postDetail.innerHTML = `
-    <div class="card">
-      <h2>${post.title}</h2>
-      <small>${post.date}</small>
-      <div>${post.content}</div>
-      <a href="#" class="back-btn" onclick="goBack();return false;">← Back to Home</a>
-    </div>
-  `;
+// Save post ID to local storage
+function savePost(id) {
+  localStorage.setItem('selectedPost', id);
 }
 
-// Back to home
-function goBack() {
-  postDetail.classList.add("hidden");
-  postsContainer.classList.remove("hidden");
+// For homepage
+if (document.getElementById("posts")) {
+  document.getElementById("year").textContent = new Date().getFullYear();
+  renderPosts();
 }
 
-// Initialize
-renderPosts();
+// For post.html
+if (document.getElementById("post-container")) {
+  const id = localStorage.getItem('selectedPost');
+  const post = posts.find(p => p.id == id);
+  if (post) {
+    document.getElementById("post-container").innerHTML = `
+      <div class="post-container">
+        <img src="${post.image}" alt="${post.title}">
+        <h1>${post.title}</h1>
+        <small>${post.date}</small>
+        <div class="post-content">${post.content}</div>
+        <a href="index.html" class="back-btn">← Back to Home</a>
+      </div>
+    `;
+  }
+}
