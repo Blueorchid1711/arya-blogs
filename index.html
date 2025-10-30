@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arya's Blogs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🪶 Arya's Blog</h1>
+    <p>Exploring AI, Technology & Innovation</p>
+  </header>
+
+  <main id="content">
+    <div class="blog-list">
+      <!-- Blog cards -->
+      <div 
+        class="blog-card" 
+        data-file="ai-at-the-core.md" 
+        data-images="ai1.png, ai2.png, ai3.png">
+        <img src="ai1.png" alt="AI at the Core" class="blog-thumb" />
+        <h2>AI at the Core</h2>
+        <p>How technology is transforming the Ghodawat Business Ecosystem.</p>
+      </div>
+
+      <!-- Add more .blog-card blocks here later for new blogs -->
+    </div>
+
+    <article id="blog-view" class="hidden">
+      <button id="back-btn">← Back to Blogs</button>
+      <div id="blog-content"></div>
+      <div id="blog-images"></div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Arya Mangesh Shinde | Built with ❤️</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
