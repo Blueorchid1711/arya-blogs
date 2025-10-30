@@ -148,4 +148,11 @@ footer {
 .back-btn:hover {
   background-color: #1b5edc;
 }
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f7fb;
+  color: #333;
+  line-height: 1.7;
+}
+
 
